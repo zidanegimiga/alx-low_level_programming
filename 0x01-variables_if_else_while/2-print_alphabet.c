@@ -5,11 +5,11 @@
  *
  *Return: Always 0 (Success)
  */
-int main (void)
+int main(void)
 {
 	char c = 'a';
 	
-	whille (c <= 'z')
+	while (c <= 'z')
 	{
 		putchar(c);
 		c++;
