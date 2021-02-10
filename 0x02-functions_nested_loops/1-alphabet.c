@@ -3,9 +3,9 @@
 /*
  * print_alphabet - prints out the lower case letters
  *
- * Return: returns null
+ * Return: returns void
  */
-void alphabet(void)
+void print_alphabet(void)
 {
 	char c = 'a';
 
