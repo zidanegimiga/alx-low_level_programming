@@ -1,76 +1,104 @@
 #include "holberton.h"
 
 /**
- * infinite_add - function to add numbers and return result in pointer
- *
- * @n1: addend 1
- * @n2: addend 2
- * @r: buffer for result
+ * _strlen - returns the length of a string
+ * @s: string s
+ * Return: length of string
+ */
+int _strlen(char *s)
+{
+	char *p = s;
+
+	while (*s)
+		s++;
+	return (s - p);
+}
+
+/**
+ * rev_string - reverses a string
+ * @s: string s
+ */
+void rev_string(char *s)
+{
+	int i = 0;
+	int size = _strlen(s);
+	char temp;
+
+	while (i < size)
+	{
+		temp = *(s + i);
+		*(s + i) = *(s + size - 1);
+		*(s + size - 1) = temp;
+		i++;
+		size--;
+	}
+}
+
+/**
+ * returnRes - changes pretotal to digit to be added
+ * @sum: pre-total
+ * @plusOne: flag to add one to res
+ * Return: returns digit to be placed into array
+ */
+int returnRes(int sum, int plusOne)
+{
+	int res;
+
+	if (sum == 9 && plusOne)
+		res = 0;
+	else if ((sum >= 10 && plusOne) || (sum < 9 && plusOne))
+		res = (sum % 10) + 1;
+	else
+		res = sum % 10;
+	return (res);
+}
+
+/**
+ * returnPlusOne - determines bool of plusOne
+ * @sum: pre-total
+ * @plusOne: flag to add one to res
+ * Return: 1 if true, 0 if false
+ */
+int returnPlusOne(int sum, int plusOne)
+{
+	if (sum > 9)
+		plusOne = 1;
+	else if (sum == 9 && plusOne)
+		plusOne = 1;
+	else
+		plusOne = 0;
+	return (plusOne);
+}
+
+/**
+ * infinite_add - function that adds two numbers
+ * @n1: first number
+ * @n2: second number
+ * @r: buffer that the function will use to store the result
  * @size_r: size of buffer
- * Return: string pointer
+ * Return: pointer to result
  */
 char *infinite_add(char *n1, char *n2, char *r, int size_r)
 {
-	long int num1, num2, res;
-	int count = 0;
+	int sum, res, first, second, i = 0, plusOne = 0;
+	int len1 = _strlen(n1), len2 = _strlen(n2);
+	char *ptr = r;
 
-	num1 = str_to_int(n1);
-	num2 = str_to_int(n2);
-	res = num1 + num2;
-	while (res > 0)
+	while (len1 > 0 || len2 > 0)
 	{
-		count++;
-		res /= 10;
-	}
-	if (count + 1 > size_r)
-		return (0);
-	else
-		return (int_to_str(num1 + num2, r, count));
-}
-
-/**
- * str_to_int - function to convert string digits to int
- *
- * @str: string of numeric digits
- * Return: int
- */
-long int str_to_int(char *str)
-{
-	long int num = 0, i, dec = 1;
-
-	i = 1;
-	while (str[i] != '\0')
-	{
-		dec *= 10;
+		first = len1 > 0 ? (*(n1 + len1 - 1) - '0') : 0;
+		second = len2 > 0 ? (*(n2 + len2 - 1) - '0') : 0;
+		sum = first + second;
+		res = returnRes(sum, plusOne);
+		plusOne = returnPlusOne(sum, plusOne);
+		*(ptr + i) = res + '0';
+		len1--;
+		len2--;
 		i++;
 	}
-	for (i = 0; str[i] != '\0'; i++)
-	{
-		num += (str[i] - '0') * dec;
-		dec /= 10;
-	}
-	return (num);
-}
-
-/**
- * int_to_str - function to convert int to string
- *
- * @num: integer to convert
- * @str: string to write to
- * @count: number of digits
- * Return: pointer string
- */
-char *int_to_str(long int num, char *str, int count)
-{
-	str[count] = '\0';
-	while (count > 0)
-	{
-		if (count == 1)
-			str[count - 1] = '0' + num;
-		else
-			str[count - 1]  = '0' + (num % 10);
-		num /= 10;
-		count--;
-	}
-	return (str);
+	if (plusOne)
+		*(ptr + i) = 1 + '0';
+	ptr[++i] = '\0';
+	rev_string(ptr);
+	return ((size_r > _strlen(ptr)) ? ptr : 0);
 }
