@@ -1,33 +1,33 @@
 #include "holberton.h"
-
 /**
- * _strstr - finds the first occurrence of the substring needle
- *  in the string haystack
- *
- * @haystack: string to work on
- * @needle: substring to match
- * Return: pointer to the first match or NULL
- */
+  *_strstr - locates a substring.
+  *finds first occurence of the substring needle in
+  *haystack.
+  *@haystack: pointer to string.
+  *@needle: pointer to substring.
+  *
+  *Return: pointer to beginning of located string
+  *or NULL if substring isnt located.
+  */
 char *_strstr(char *haystack, char *needle)
 {
-	int i, j, k;
-
-	for (i = 0; haystack[i] != '\0'; i++)
+	while (*haystack)
 	{
-		for (j = 0; needle[j] != '\0'; j++)
+		char *start = haystack;
+		char *needlestr = needle;
+
+		while (*needlestr && *haystack && *haystack == *needlestr)
 		{
-			if (haystack[i] == needle[j])
-			{
-				k = i;
-				while (needle[j] != '\0' && needle[j] == haystack[k])
-				{
-					if (needle[j + 1] == '\0' && needle[j] == haystack[k])
-						return (haystack + i);
-					k++;
-					j++;
-				}
-			}
+			haystack++;
+			needlestr++;
 		}
+
+		if (!*needlestr)
+		{
+			return (start);
+		}
+
+		haystack = start + 1;
 	}
-	return (NULL);
+	return (0);
 }
