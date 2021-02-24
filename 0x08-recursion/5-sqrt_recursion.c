@@ -1,36 +1,38 @@
 #include "holberton.h"
-
 /**
- * _sqrt_recursion - returns the natural square root of a number
- *
- * @n: number
- * Return: int
- */
-int _sqrt_recursion(int n)
+  *helperFunction - checks if sqrt of number exists
+  *@num: number.
+  *@pSqrt: poissible sqrt of number.
+  *
+  *Return: sqrt of number ot -1 for error.
+  */
+int helperFunction(int num, int pSqrt)
 {
-	int square = 2;
+	if ((pSqrt * pSqrt) == num)
+	{
+		return (pSqrt);
+	}
+	else
+	{
+		if ((pSqrt * pSqrt) > num)
+			return (-1);
+		else
+			return (helperFunction(num, pSqrt + 1));
 
-	if (n < 0)
-		return (-1);
-	else if (n == 0 || n == 1)
-		return (n);
-	return (is_sqrt(n, square));
+	}
 }
 
 /**
- * is_sqrt - function to check whether it's a natural square root or not
- *
- * @n: number
- * @square: test number
- * Return: int
- */
-int is_sqrt(int n, int square)
+  *_sqrt_recursion - returns the natural square root of a number.
+  *@n: number to find sqrt of.
+  *
+  *Return: squareroot of n.
+  *-1 if n does not have a natural sqrt.
+  */
+int _sqrt_recursion(int n)
 {
-	if (square * square == n)
-		return (square);
-	else if (square * square < n)
-		return (is_sqrt(n, square + 1));
-	else if (square * square > n)
+	if (n < 0)
 		return (-1);
-	return (-1);
+	else
+		return (helperFunction(n, 0));
 }
