@@ -1,7 +1,7 @@
 #include "holberton.h"
 
 /**
- * _pus_recursion - functions like puts();
+ * _puts_recursion - functions like puts();
  * @s: input
  * Return: Always 00 (success)
  */
