@@ -9,10 +9,10 @@
 int is_prime_number(int n){
 	i = 2;
 	if (n <= 2)
-		return (n == 2) ? true : false;
+		return (n == 2) 
 	if (n % i == 0) 
-		return false;
+		return (0);
 	if (i * i > n)
-		return true;
+		return (1);
 	return is_prime_number(n, i + 1); 
 } 
