@@ -6,7 +6,8 @@
   *
   *Return: 0 if not prime, 1 if prime.
   */
-int is_prime_number(int n){
+int is_prime_number(int n)
+{
 	i = 2;
 	if (n <= 2)
 		return (n == 2) ? 1 : 0;
