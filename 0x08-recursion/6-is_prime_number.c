@@ -1,45 +1,18 @@
 #include "holberton.h"
 /**
-  *helperFunction - returns 0 or 1.
-  *@num: number being checked.
-  *@i: possible factor of the number.
+  *is_prime_number - returns 0 or 1.
+  *@n: number being checked.
+  *@i: I'll be using 2.
   *
   *Return: 0 if not prime, 1 if prime.
   */
-int helperFunction(int num, int i)
-{
-	if (i < num)
-	{
-		if (num % i == 0)
-		{
-			return (0);
-		}
-		else
-		{
-			return (helperFunction(num, i + 1));
-		}
-	}
-	else
-	{
-		return (1);
-	}
-}
-
-/**
-  *is_prime_number - checks if number is prime or not.
-  *@n: number to be checked.
-  *
-  *Return: 1 if number is prime.
-  *0 if number is not prime.
-  */
-int is_prime_number(int n)
-{
-	if (n <= 1)
-	{
-		return (0);
-	}
-	else
-	{
-		return (helperFunction(n, 2));
-	}
-}
+int is_prime_number(int n){
+	i = 2;
+	if (n <= 2)
+		return (n == 2) ? true : false;
+	if (n % i == 0) 
+		return false;
+	if (i * i > n)
+		return true;
+	return is_prime_number(n, i + 1); 
+} 
