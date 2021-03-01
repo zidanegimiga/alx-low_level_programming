@@ -1,19 +1,17 @@
 #include <stdio.h>
 
 /**
- * main - prints arguments passed to it by the cmd
+ * main - prints all arguments it receives
+ *
  * @argc: argument count
  * @argv: argument vector
- *
  * Return: int
  */
 int main(int argc, char *argv[])
 {
-	int count;
-	
-	for (count = 0; count < argc; count++)
-	{
-		printf("%s\n", argv[count]);
-	}
+	int i;
+
+	for (i = 0; i < argc; i++)
+		printf("%s\n", argv[i]);
 	return (0);
 }
