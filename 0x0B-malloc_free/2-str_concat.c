@@ -2,29 +2,37 @@
 #include <stdlib.h>
 
 /**
- * str_concat - concatenates two strings
+ * str_concat - concatenates two string
  *
- * @s1: string 1
- * @s2: string 2
- * Return: char pointer
+ * @s1: first string
+ * @s2: second string
+ *
+ * Return: s1_s2 if success, NULL if fail
  */
 char *str_concat(char *s1, char *s2)
 {
-	unsigned int i, j, size = 0;
-	char *str;
+int size1, size2;
+char *s1_s2;
 
-	for (i = 0; s1[i] != '\0'; i++)
-		size++;
-	for (i = 0; s2[i] != '\0'; i++)
-		size++;
-	str = malloc(sizeof(char) * (size + 1));
-	for (i = 0; s1[i] != '\0'; i++)
-		str[i] = s1[i];
-	for (j = 0; s2[j] != '\0'; j++)
-	{
-		str[i] = s2[j];
-		i++;
-	}
-	str[size] = '\0';
-	return (str);
+if (s1 == NULL)
+s1 = "";
+if (s2 == NULL)
+s2 = "";
+
+for (size1 = 0; s1[size1]; size1++)
+;
+for (size2 = 0; s2[size2]; size2++)
+;
+s1_s2 = malloc((size1 + size2 + 1) * sizeof(char));
+
+if (s1_s2 == NULL)
+return (NULL);
+
+for (size1 = 0; s1[size1] != '\0'; size1++)
+s1_s2[size1] = s1[size1];
+for (size2 = 0; s2[size2] != '\0'; size2++, size1++)
+s1_s2[size1] = s2[size2];
+s1_s2[size1] = '\0';
+
+return (s1_s2);
 }
