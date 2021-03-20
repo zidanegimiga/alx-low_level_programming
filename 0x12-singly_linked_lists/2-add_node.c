@@ -1,35 +1,41 @@
 #include "lists.h"
+/**
+  *_strlen - finds length of a string.
+  *@str: string.
+  *
+  *Return: length of string.
+  */
+int _strlen(const char *str)
+{
+	int i;
+
+	while (str[i] != '\0')
+		i++;
+
+	return (i);
+}
 
 /**
- * add_node -  adds a new node at the beginning of a list_t list
- *
- * @head: pointer to head of the list
- * @str: string to be added in new node
- * Return: pointer to added node
- */
+  *add_node - adds a new node at the beginning of a list_t.
+  *@head: pointer to first element of the list.
+  *@str: string to be duplicated.
+  *
+  *Return: address of the new element or NULL if it failed.
+  */
 list_t *add_node(list_t **head, const char *str)
 {
-	list_t *new_node = malloc(sizeof(list_t));
-	unsigned int len = 0;
+	list_t *temp;
 
-	if (!new_node)
-	{
-		free(new_node);
+	temp = malloc(sizeof(list_t));
+	if (temp == NULL)
 		return (NULL);
-	}
-	while (str[len])
-		len++;
-	new_node->str = strdup(str);
-	new_node->len = len;
-	if (!*head)
-	{
-		new_node->next = NULL;
-		*head = new_node;
-	}
-	else
-	{
-		new_node->next = *head;
-		*head = new_node;
-	}
+	/* temp now points to first element*/
+	temp->next = *head;
+	temp->str = strdup(str);
+	temp->len = _strlen(str);
+
+	*head = temp;
+
 	return (*head);
+
 }
