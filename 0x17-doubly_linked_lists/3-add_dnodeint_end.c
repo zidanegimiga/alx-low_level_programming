@@ -3,30 +3,31 @@
 #include "lists.h"
 
 /**
- * add_dnodeint - adds a new node at the beginning of a doubly linked list
- * @head: double pointer to head node of list
- * @n: int variable to initialize new node
+ * add_dnodeint_end - adds a new node at the end of a doubly linked list
+ * @head: double pointer to head of doubly linked list
+ * @n: int variable to initialize new node with
  *
- * Return: address of new element or NULL if it failed
+ * Return: address of new element, or NULL if it failed
  */
-dlistint_t *add_dnodeint(dlistint_t **head, const int n)
+dlistint_t *add_dnodeint_end(dlistint_t **head, const int n)
 {
-	dlistint_t *newnode,  *temp;
+	dlistint_t *newnode, *temp;
 
 	newnode = (dlistint_t *)malloc(sizeof(dlistint_t));
 	if (newnode == NULL)
 		return (NULL);
 	newnode->n = n;
-	newnode->prev = NULL;
+	newnode->next = NULL;
 	temp = *head;
 	if (temp == NULL)
 	{
-		newnode->next = NULL;
+		newnode->prev = NULL;
 		*head = newnode;
 		return (newnode);
 	}
-	newnode->next = temp;
-	temp->prev = newnode;
-	*head = newnode;
+	while (temp->next != NULL)
+		temp = temp->next;
+	temp->next = newnode;
+	newnode->prev = temp;
 	return (newnode);
 }
